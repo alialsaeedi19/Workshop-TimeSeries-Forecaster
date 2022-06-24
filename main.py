@@ -46,7 +46,7 @@ st.markdown(
 
  # add a input field that allows you to select ["Total Load","PV production","Wind production"] and stores it in a variable called  "option"
 
-## YOUR CODE HERE ##
+option = st.selectbox("option",  ["Total Load","PV production","Wind production"])
 
 
 """
@@ -58,14 +58,14 @@ It is recommended to use a timeframe that includes reoccuring patterns for the m
 The more data and the longer forecast horizon are selected, the longer it will take to do the prediction.
 """
 # Layout two columns
-col1, col2 = st.columns(2) 
+col1, col2 = st.columns(2)
 
 # Two sliders to select historical data and forecast horizon
 no_days = col1.slider("Historical data in days.", min_value=1, max_value=14 )
 
 # add another slide that select the "Forecast Horizon in days" and stores it in a variable called "button_periods_to_predict"
 
-## YOUR CODE HERE ##
+button_periods_to_predict = col2.slider("Forecast Horizon in days", min_value=1, max_value=7)
 
 
 no_of_hours_to_predict = button_periods_to_predict *24
@@ -192,17 +192,15 @@ if forecast_ready:
     """
 
     # Plot the variable "fig_forecast"
-    ## YOUR CODE HERE ##
+    st.write(fig_forecast)
 
     # make a selection of the most import columns fo the "forecast" dataframe and display them in a table (and rename column "ds" to "datetime")
-    ## YOUR CODE HERE ##
+    st.write(forecast.loc[:,["ds", "yhat"]].rename(columns={"ds": "datetime"}))
 
     # add a heading "Components Plot"
-    ## YOUR CODE HERE ##
-
+    st.write("### Components Plot")
     # plot the variable fig_components plot
-    ## YOUR CODE HERE ##
-    
+    st.write(fig_comp)
     if reg_coef is not None:
 
         """
